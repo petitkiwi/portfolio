@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =====================================================================
+       META & DOCUMENT SETUP
+       ===================================================================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Claire LEFEZ — Programmer Analyst & Creative Spirit. Portfolio showcasing web development projects, creative work, and professional journey." />
+  <meta name="author" content="Claire LEFEZ" />
+
+  <!-- Open Graph tags for link previews (LinkedIn, Slack, etc.) -->
+  <meta property="og:title" content="Claire LEFEZ — Portfolio" />
+  <meta property="og:description" content="Programmer Analyst & Creative Spirit" />
+  <meta property="og:type" content="website" />
+
+  <title>Claire LEFEZ — Portfolio</title>
+
+  <!-- Favicon (browser tab icon) -->
+  <link rel="icon" type="image/png" href="assets/logo_dark.png" />
+
+  <!-- Google Fonts: Playfair Display (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Flag icons (CDN) — renders country flags reliably on all OS including Windows -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       NAVIGATION BAR
+       Fixed top bar with smooth-scroll links to each section.
+       The active link is highlighted by JavaScript as the user scrolls.
+  =========================================================================== -->
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+
+      <!-- Logotype / initials -->
+      <a class="nav-logo" href="#about" aria-label="Go to top">
+        <img src="assets/logo_light.png" alt="" class="nav-logo-img" aria-hidden="true" />
+        CL
+      </a>
+
+      <!-- Hamburger button — visible only on mobile -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Navigation links -->
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="#about"        class="nav-link" data-section="about">About</a></li>
+        <li><a href="#journey"      class="nav-link" data-section="journey">Journey</a></li>
+        <li><a href="#skills"       class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#testimonials" class="nav-link" data-section="testimonials">Testimonials</a></li>
+        <li><a href="#contact"      class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- ==========================================================================
+       HERO / ABOUT SECTION
+       Large introductory section with profile photo, name, tagline,
+       a short bio, and quick-access icon links.
+  =========================================================================== -->
+  <section id="about" class="section section-about" aria-label="About Claire">
+
+    <!-- Decorative background blobs (CSS-animated, purely visual) -->
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
+
+    <div class="about-inner container">
+
+      <!-- ── Profile picture ─────────────────────────────────────── -->
+      <div class="about-photo-wrap">
+        <div class="about-photo-frame">
+          <img
+            src="assets/IMG-0059.JPG"
+            alt="Portrait of Claire LEFEZ"
+            class="about-photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- Fallback initials shown when image is missing -->
+          <div class="about-photo-fallback" aria-hidden="true">CL</div>
+        </div>
+        <!-- Decorative ring around the photo -->
+        <div class="about-photo-ring" aria-hidden="true"></div>
+      </div>
+
+      <!-- ── Text content ─────────────────────────────────────────── -->
+      <div class="about-text">
+
+        <!-- Subtle greeting line -->
+        <span class="about-greeting">Hey y'all, I'm</span>
+
+        <!-- Main name heading -->
+        <h1 class="about-name">Claire <span class="accent">LEFEZ</span></h1>
+
+        <!-- Tagline / role -->
+        <p class="about-tagline">Programmer Analyst &amp; Creative Spirit</p>
+
+        <!-- Short bio -->
+        <p class="about-bio">
+          I love creating, thinking, digging, optimizing everything that comes my way; I bring energy and color to projects!
+          I build projects that are meaningful and impactful, and I never want to stop learning.<br/>
+          As my grandfather used to say, I'm not going to work, I'm going to play.
+        </p>
+
+        <!-- ── Quick links ───────────────────────────────────────── -->
+        <!-- Each link has an SVG icon + accessible label             -->
+        <div class="quick-links" role="list" aria-label="Quick links">
+
+          <!-- GitHub -->
+          <a href="https://github.com/petitkiwi" target="_blank" rel="noopener noreferrer"
+             class="quick-link" role="listitem" aria-label="GitHub profile">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-1.93c-3.19.69-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.55-.29-5.23-1.27-5.23-5.67 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.93 10.93 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.13v3.16c0 .3.2.66.79.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/clairelefez" target="_blank" rel="noopener noreferrer"
+             class="quick-link" role="listitem" aria-label="LinkedIn profile">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <!-- IFT -->
+          <a href="https://ift.devinci.fr/" target="_blank" rel="noopener noreferrer"
+             class="quick-link" role="listitem" aria-label="IFT website">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-7 9.17V17l7 3.83 7-3.83v-4.83L12 17l-7-4.83z"/>
+            </svg>
+            <span>IFT</span>
+          </a>
+
+          <!-- Email -->
+          <a href="mailto:claire.lefez@gmail.com"
+             class="quick-link" role="listitem" aria-label="Send an email to Claire">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <span>Email</span>
+          </a>
+
+          <!-- CV Download — replace href with the actual PDF path -->
+          <a href="assets/Resume_ClaireLEFEZ.pdf" download
+             class="quick-link quick-link--cta" role="listitem" aria-label="Download CV as PDF">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+            <span>Download CV</span>
+          </a>
+
+        </div><!-- /.quick-links -->
+      </div><!-- /.about-text -->
+    </div><!-- /.about-inner -->
+  </section><!-- /#about -->
+
+
+
+  <!-- ==========================================================================
+       JOURNEY / RESUME SECTION
+  =========================================================================== -->
+  <section id="journey" class="section section-journey" aria-label="Professional journey and education">
+    <div class="container">
+
+      <div class="section-header fade-in">
+        <span class="section-label">Where I've been</span>
+        <h2 class="section-title">Journey</h2>
+      </div>
+
+      <!-- Timeline wrapper — the vertical line is drawn with CSS pseudo-elements -->
+      <!-- Entries run oldest → newest (top → bottom) -->
+      <div class="timeline" role="list">
+
+            <!-- TotalEnergies -->
+        <div class="timeline-item fade-in" role="listitem">
+          <div class="timeline-marker timeline-marker--work" aria-hidden="true">
+            <!-- Work icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-10-2h4v2h-4V5zm10 14H4V9h16v10z"/>
+            </svg>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-tag timeline-tag--work">IT Project Management</span>
+            <span class="timeline-date">June 2021 – Aug 2021</span>
+            <h4 class="timeline-title">TotalEnergies</h4>
+            <p class="timeline-org">Nanterre, France</p>
+            <p class="timeline-desc">
+              Redesigned the department's training website; drove innovation &amp; continuous
+              optimisation of communication and training tools; created &amp; managed dashboards,
+              KPI presentations &amp; market research; provided general project portfolio
+              management support to the PMO &amp; IT project managers.
+            </p>
+          </div>
+        </div>
+
+        <!-- ULL -->
+        <div class="timeline-item fade-in" role="listitem">
+          <div class="timeline-marker" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-7 9.17V17l7 3.83 7-3.83v-4.83L12 17l-7-4.83z"/>
+            </svg>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-tag timeline-tag--edu">Exchange Semester</span>
+            <span class="timeline-date">Aug 2021 - Dec 2021</span>
+            <h4 class="timeline-title">University of Louisiana at Lafayette (ULL) — Computer Science</h4>
+            <p class="timeline-org">Louisiana, USA</p>
+            <p class="timeline-desc">
+              Computer Science exchange with courses in Finance, Statistics, and Programming
+              (Java &amp; Python).<br/>
+              Achieved a <strong>GPA of 4.0 / 4.0</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Air Giants & UOB -->
+        <div class="timeline-item fade-in" role="listitem">
+          <div class="timeline-marker timeline-marker--work" aria-hidden="true">
+            <!-- Work icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-10-2h4v2h-4V5zm10 14H4V9h16v10z"/>
+            </svg>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-tag timeline-tag--work">Soft Robotics Research</span>
+            <span class="timeline-date">Apr 2023 – Jul 2023</span>
+            <h4 class="timeline-title">Air Giants &amp; University of Bristol</h4>
+            <p class="timeline-org">Bristol, UK</p>
+            <p class="timeline-desc">
+              Human–robot interaction study, design, conception &amp; fabrication of giant soft
+              robots for artistic exhibitions and academic research. Findings published &amp;
+              presented at CHI&nbsp;2024.
+            </p>
+          </div>
+        </div>
+
+        <!-- ESILV -->
+        <div class="timeline-item fade-in" role="listitem">
+          <div class="timeline-marker" aria-hidden="true">
+            <!-- Graduation-cap icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-7 9.17V17l7 3.83 7-3.83v-4.83L12 17l-7-4.83z"/>
+            </svg>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-tag timeline-tag--edu">Engineering Diploma</span>
+            <span class="timeline-date">2019 – 2024</span>
+            <h4 class="timeline-title">ESILV</h4>
+            <p class="timeline-org">Paris, France</p>
+            <p class="timeline-desc">
+              5-year engineering programme with a Creative Technology major. Coursework in
+              Project Management, Design, 3D Modelling, OOP (C#), Statistics, Numerical
+              Analysis, Mathematics, Physics &amp; Finance.
+            </p>
+          </div>
+        </div>
+
+        <!-- CHANEL -->
+        <div class="timeline-item fade-in" role="listitem">
+          <div class="timeline-marker timeline-marker--work" aria-hidden="true">
+            <!-- Work icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-10-2h4v2h-4V5zm10 14H4V9h16v10z"/>
+            </svg>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-tag timeline-tag--work">IT Business Analysis</span>
+            <span class="timeline-date">Feb 2024 – Aug 2024</span>
+            <h4 class="timeline-title">CHANEL</h4>
+            <p class="timeline-org">Paris, France</p>
+            <p class="timeline-desc">
+              Product Owner of an internal mobile application; IT Business Analyst for product
+              catalogue software. Conducted need analysis, wrote user stories &amp; mock-ups,
+              facilitated stakeholder workshops (Devs · Clients · Digital team), ran functional
+              &amp; technical testing (front-end, back-end, APIs, SQL), managed the roadmap,
+              and handled release notes, newsletters &amp; training redesign.
+            </p>
+          </div>
+        </div>
+
+        <!-- IFT -->
+        <div class="timeline-item fade-in" role="listitem">
+          <div class="timeline-marker" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm-7 9.17V17l7 3.83 7-3.83v-4.83L12 17l-7-4.83z"/>
+            </svg>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-tag timeline-tag--edu">Master of Science</span>
+            <span class="timeline-date">2022 – 2024</span>
+            <h4 class="timeline-title">IFT — Innovation &amp; Creative Technology</h4>
+            <p class="timeline-org">Courbevoie, France</p>
+            <p class="timeline-desc">
+              Double-degree MSc focused on innovation, web development (HTML/CSS/JS) and
+              advanced manufacturing: Mechanics, Electronics, Biomaterials &amp; Low-Tech.<br/>              
+              Graduated <strong>Valedictorian</strong>.
+            </p>
+          </div>
+        </div>
+        
+        <!-- SG -->
+        <div class="timeline-item fade-in" role="listitem">
+          <div class="timeline-marker timeline-marker--work" aria-hidden="true">
+            <!-- Work icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-10-2h4v2h-4V5zm10 14H4V9h16v10z"/>
+            </svg>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-tag timeline-tag--work">Programmer Analyst</span>
+            <span class="timeline-date">Oct 2025 – Sep 2027</span>
+            <h4 class="timeline-title">SG</h4>
+            <p class="timeline-org">Montréal, Canada</p>
+            <p class="timeline-desc">
+              ...
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /.timeline -->
+    </div><!-- /.container -->
+  </section><!-- /#journey -->
+
+
+  <!-- ==========================================================================
+       SKILLS SECTION
+       Visual display of technical and soft skills, grouped by category.
+       Each skill shows a name and an animated progress bar.
+  =========================================================================== -->
+  <section id="skills" class="section section-skills" aria-label="Skills">
+    <div class="container">
+
+      <div class="section-header fade-in">
+        <span class="section-label">What I work with</span>
+        <h2 class="section-title">Skills</h2>
+      </div>
+
+      <div class="skills-grid fade-in">
+
+        <!-- ── Programming & Web ─────────────────────────────────── -->
+        <!-- Levels are self-assessed — adjust as you see fit        -->
+        <div class="skills-group">
+          <h3 class="skills-group-title">Programming &amp; Web</h3>
+
+          <div class="skill-bar" data-level="85">
+            <div class="skill-bar-label">
+              <span>HTML / CSS / JS</span>
+              <span class="skill-bar-pct">85%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" data-level="75">
+            <div class="skill-bar-label">
+              <span>Python</span>
+              <span class="skill-bar-pct">75%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" data-level="70">
+            <div class="skill-bar-label">
+              <span>SQL</span>
+              <span class="skill-bar-pct">70%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" data-level="70">
+            <div class="skill-bar-label">
+              <span>Java / C#</span>
+              <span class="skill-bar-pct">70%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" data-level="60">
+            <div class="skill-bar-label">
+              <span>C / C++ / R</span>
+              <span class="skill-bar-pct">60%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+        </div><!-- /.skills-group (programming) -->
+
+        <!-- ── Tools & Design ────────────────────────────────────── -->
+        <div class="skills-group">
+          <h3 class="skills-group-title">Tools &amp; Design</h3>
+
+          <div class="skill-bar" data-level="80">
+            <div class="skill-bar-label">
+              <span>Figma / Photoshop</span>
+              <span class="skill-bar-pct">80%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" data-level="75">
+            <div class="skill-bar-label">
+              <span>Jira / Confluence / ServiceNow</span>
+              <span class="skill-bar-pct">75%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" data-level="70">
+            <div class="skill-bar-label">
+              <span>Power BI / Power Automate</span>
+              <span class="skill-bar-pct">70%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" data-level="65">
+            <div class="skill-bar-label">
+              <span>SolidWorks / Fusion 360 / KiCad</span>
+              <span class="skill-bar-pct">65%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar" data-level="65">
+            <div class="skill-bar-label">
+              <span>Azure Storage / Postman / DBeaver</span>
+              <span class="skill-bar-pct">65%</span>
+            </div>
+            <div class="skill-bar-track" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-bar-fill"></div>
+            </div>
+          </div>
+
+        </div><!-- /.skills-group (tools) -->
+
+        <!-- ── Methods & Soft Skills ─────────────────────────────── -->
+        <div class="skills-group skills-group--tags">
+          <h3 class="skills-group-title">Methods &amp; Soft Skills</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Agile / Scrum</span>
+            <span class="skill-tag">V-Model</span>
+            <span class="skill-tag">Project Management</span>
+            <span class="skill-tag">Business Analysis</span>
+            <span class="skill-tag">Leadership</span>
+            <span class="skill-tag">Teamwork</span>
+            <span class="skill-tag">Creativity</span>
+            <span class="skill-tag">Efficiency</span>
+            <span class="skill-tag">Agility</span>
+          </div>
+        </div><!-- /.skills-group (methods & soft) -->
+
+        <!-- ── Languages ─────────────────────────────────────────── -->
+        <div class="skills-group skills-group--tags">
+          <h3 class="skills-group-title">Languages</h3>
+          <div class="lang-columns">
+            <!-- Column 1 — stronger languages -->
+            <div class="skill-tags">
+              <span class="skill-tag skill-tag--lang"><span class="lang-flag fi fi-fr"></span> French <span class="lang-level">Native</span></span>
+              <span class="skill-tag skill-tag--lang"><span class="lang-flag fi fi-gb"></span> English <span class="lang-level">Bilingual</span></span>
+              <span class="skill-tag skill-tag--lang"><span class="lang-flag fi fi-es"></span> Spanish <span class="lang-level">Basic</span></span>
+            </div>
+            <!-- Column 2 — extra / in progress -->
+            <div class="skill-tags">
+              <span class="skill-tag skill-tag--lang"><span class="lang-flag fi fi-sa"></span> Arabic <span class="lang-level">Super Basic</span></span>
+              <span class="skill-tag skill-tag--lang"><img src="assets/flag-breizh.png" alt="Breton flag" class="lang-flag lang-flag--img"/> Breton <span class="lang-level">Extra Basic</span></span>
+              <span class="skill-tag skill-tag--lang"><span class="lang-flag fi fi-br"></span> Portuguese <span class="lang-level">In Progress...</span></span>
+            </div>
+          </div>
+        </div><!-- /.skills-group (languages) -->
+
+      </div><!-- /.skills-grid -->
+    </div><!-- /.container -->
+  </section><!-- /#skills -->
+
+
+  <!-- ==========================================================================
+       TESTIMONIALS SECTION
+  =========================================================================== -->
+  <section id="testimonials" class="section section-testimonials" aria-label="Testimonials">
+    <div class="container">
+
+      <div class="section-header fade-in">
+        <span class="section-label">Kind words</span>
+        <h2 class="section-title">Testimonials</h2>
+      </div>
+
+      <div class="testimonials-grid fade-in" role="list">
+
+        <blockquote class="testimonial-card" role="listitem">
+          <div class="testimonial-quote-mark" aria-hidden="true">"</div>
+          <p class="testimonial-text">
+            She was always willing to take on new challenges and responsibilities, 
+            and she delivered high-quality work on time and within budget. 
+            She also showed great initiative and creativity, proposing innovative solutions 
+            and improvements to existing processes and tools.
+          </p>
+          <footer class="testimonial-footer">
+            <div class="testimonial-avatar" aria-hidden="true">AD</div>
+            <div class="testimonial-author">
+              <strong>Alexandre DAY</strong>
+              <span>IT Process and Governance Manager</span>
+              <strong>TotalEnergies</strong>
+            </div>
+          </footer>
+          <a href="assets/testimonial_TOTALENERGIES.pdf" target="_blank" rel="noopener noreferrer"
+             class="testimonial-pdf-link" aria-label="Open TotalEnergies testimonial PDF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            View letter
+          </a>
+        </blockquote>
+
+        <blockquote class="testimonial-card" role="listitem">
+          <div class="testimonial-quote-mark" aria-hidden="true">"</div>
+          <p class="testimonial-text">
+            I wholeheartedly recommend Claire Lefez for 
+            any academic or professional pursuit she chooses to undertake. 
+            Her creative thinking, independence, and interpersonal skills are exemplary, 
+            and she will undoubtedly be an asset to any team or organization.
+          </p>
+          <footer class="testimonial-footer">
+            <div class="testimonial-avatar" aria-hidden="true">RD</div>
+            <div class="testimonial-author">
+              <strong>Anne ROUDAUT</strong>
+              <span>Head of the Bristol Interaction Group</span>
+              <strong>University of Bristol</strong>
+            </div>
+          </footer>
+          <a href="assets/testimonial_UOB.pdf" target="_blank" rel="noopener noreferrer"
+             class="testimonial-pdf-link" aria-label="Open University of Bristol testimonial PDF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            View letter
+          </a>
+        </blockquote>
+
+        <blockquote class="testimonial-card" role="listitem">
+          <div class="testimonial-quote-mark" aria-hidden="true">"</div>
+          <p class="testimonial-text">
+            Pour chacune de ces missions, Claire a su se distinguer en faisant preuve d'autonomie et de rigueur. 
+            [...] Quelles que soient les missions qui lui étaient confiées, 
+            Claire manifestait un réel enthousiasme ainsi qu'un désir d'apprendre.
+          </p>
+          <footer class="testimonial-footer">
+            <div class="testimonial-avatar" aria-hidden="true">CM</div>
+            <div class="testimonial-author">
+              <strong>Camille MACLET</strong>
+              <span>Chef de Projet IT Achats &amp; PMFE</span>
+              <strong>CHANEL</strong>
+            </div>
+          </footer>
+          <a href="assets/testimonial_CHANEL.pdf" target="_blank" rel="noopener noreferrer"
+             class="testimonial-pdf-link" aria-label="Open CHANEL testimonial PDF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            View letter
+          </a>
+        </blockquote>
+
+      </div><!-- /.testimonials-grid -->
+    </div><!-- /.container -->
+  </section><!-- /#testimonials -->
+
+
+  <!-- ==========================================================================
+       CONTACT SECTION
+       A minimal contact invitation with email link and social icons.
+  =========================================================================== -->
+  <section id="contact" class="section section-contact" aria-label="Contact">
+    <div class="container">
+
+      <div class="section-header fade-in">
+        <span class="section-label">Let's talk</span>
+        <h2 class="section-title">Get in touch</h2>
+      </div>
+
+      <div class="contact-inner fade-in">
+        <p class="contact-copy">
+          Whether you have a project in mind, an opportunity to share,
+          or just want to say hello — I'd love to hear from you.
+        </p>
+
+        <!-- Primary email CTA -->
+        <a href="mailto:claire.lefez@gmail.com" class="contact-btn">
+          Say hello ✉
+        </a>
+
+        <!-- Secondary social icons row -->
+        <div class="contact-socials" aria-label="Social links">
+          <a href="https://github.com/petitkiwi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.78-.25.78-.55v-1.93c-3.19.69-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.55-.29-5.23-1.27-5.23-5.67 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.93 10.93 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.07 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.13v3.16c0 .3.2.66.79.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/clairelefez" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/></svg>
+          </a>
+          <a href="mailto:claire.lefez@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div><!-- /.contact-socials -->
+
+      </div><!-- /.contact-inner -->
+    </div><!-- /.container -->
+  </section><!-- /#contact -->
+
+
+  <!-- ==========================================================================
+       FOOTER
+       Minimal footer with copyright and a "back to top" link.
+  =========================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <span class="footer-copy">© <span id="footerYear"></span> Claire LEFEZ — All rights reserved.</span>
+      <a href="#about" class="footer-top" aria-label="Back to top">
+        ↑ Back to top
+      </a>
+    </div>
+  </footer>
+
+
+  <!-- Main JavaScript file — loaded at end of body for performance -->
+  <script src="script.js"></script>
+
+</body>
+</html>

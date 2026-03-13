@@ -1,0 +1,1506 @@
+/* ============================================================================
+   CLAIRE LEFEZ — PORTFOLIO STYLESHEET
+   Theme: "Vert Chasseur" — deep forest / hunting green palette
+   
+   Color palette used throughout:
+     --vc-900  #1a2e1a  — darkest forest, main backgrounds on dark sections
+     --vc-800  #243524  — rich dark green, navbar background
+     --vc-700  #2e4a2e  — deep green, card hovers & secondary backgrounds
+     --vc-600  #3a5c3a  — mid-forest green, borders & dividers
+     --vc-500  #4a7c4a  — core "vert chasseur", primary accent & CTAs
+     --vc-400  #6a9e6a  — lighter sage, hover states on accents
+     --vc-300  #8dbc8d  — pale sage, subtle highlights
+     --vc-200  #b8d4b8  — very light green, tag backgrounds on dark BG
+     --vc-100  #e8f3e8  — near-white green tint, light section backgrounds
+     --cream   #f5f0e8  — warm off-white, main light background
+     --gold    #c9a84c  — warm gold accent for sparkle & headings
+   ============================================================================ */
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
+   All colours, spacing, font sizes, transitions centralised here.
+   Change a value here to affect the whole site.
+────────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Vert Chasseur scale */
+  --vc-900: #1a2e1a;
+  --vc-800: #243524;
+  --vc-700: #2e4a2e;
+  --vc-600: #3a5c3a;
+  --vc-500: #4a7c4a;
+  --vc-400: #6a9e6a;
+  --vc-300: #8dbc8d;
+  --vc-200: #b8d4b8;
+  --vc-100: #e8f3e8;
+
+  /* Neutral / warm tones */
+  --cream:       #f5f0e8;
+  --cream-dark:  #ede6d6;
+  --gold:        #c9a84c;
+  --gold-light:  #e0c57e;
+  --text-dark:   #1e1e1e;
+  --text-mid:    #4a4a4a;
+  --text-light:  #7a7a7a;
+  --white:       #ffffff;
+
+  /* Semantic aliases */
+  --color-bg-light:    var(--cream);
+  --color-bg-section:  var(--vc-100);
+  --color-bg-dark:     var(--vc-900);
+  --color-accent:      var(--vc-500);
+  --color-accent-hover:var(--vc-400);
+  --color-heading:     var(--vc-800);
+  --color-body:        var(--text-mid);
+  --color-border:      var(--vc-200);
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;  /* headings */
+  --font-body:    'Inter', system-ui, sans-serif;       /* body text */
+
+  /* Spacing scale */
+  --space-xs:  0.4rem;
+  --space-sm:  0.8rem;
+  --space-md:  1.6rem;
+  --space-lg:  3.2rem;
+  --space-xl:  6.4rem;
+  --space-2xl: 10rem;
+
+  /* Layout */
+  --container-max: 1180px;
+  --navbar-h:      72px;
+  --radius-sm:     6px;
+  --radius-md:     12px;
+  --radius-lg:     24px;
+
+  /* Transitions */
+  --transition-fast:   0.18s ease;
+  --transition-mid:    0.35s ease;
+  --transition-slow:   0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Shadows */
+  --shadow-sm:  0 2px 8px  rgba(26, 46, 26, 0.10);
+  --shadow-md:  0 6px 24px rgba(26, 46, 26, 0.14);
+  --shadow-lg:  0 16px 48px rgba(26, 46, 26, 0.18);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   2. RESET & BASE
+   Minimal, opinionated reset so all elements start from a clean slate.
+────────────────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Native smooth scrolling — JS also uses scroll-behavior */
+  scroll-behavior: smooth;
+  /* Prevent layout shift when scrollbar appears/disappears */
+  scrollbar-gutter: stable;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-body);
+  background-color: var(--color-bg-light);
+  /* Prevent horizontal overflow on small screens */
+  overflow-x: hidden;
+}
+
+/* Smooth focus ring for keyboard navigation */
+:focus-visible {
+  outline: 3px solid var(--vc-400);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remove default list styles for semantic lists */
+ul, ol { list-style: none; }
+
+/* Images scale within their container */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Make links inherit colour by default */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   3. TYPOGRAPHY UTILITIES
+────────────────────────────────────────────────────────────────────────────── */
+
+/* Accent colour for inline spans */
+.accent { color: var(--vc-500); }
+
+/* Section header pattern: label + large title */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* Small uppercase label above section titles */
+.section-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vc-500);
+  margin-bottom: var(--space-sm);
+}
+
+/* Main section heading */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1.15;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   4. LAYOUT UTILITIES
+────────────────────────────────────────────────────────────────────────────── */
+
+/* Centred, max-width wrapper */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Base section padding */
+.section {
+  padding-block: var(--space-xl);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   5. SCROLL-REVEAL ANIMATION
+   Elements with .fade-in start invisible and slide up.
+   The JavaScript IntersectionObserver adds .is-visible to trigger the animation.
+────────────────────────────────────────────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay for child elements inside a revealed container */
+.fade-in:nth-child(2) { transition-delay: 0.1s; }
+.fade-in:nth-child(3) { transition-delay: 0.2s; }
+.fade-in:nth-child(4) { transition-delay: 0.3s; }
+
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   6. NAVIGATION BAR
+   Fixed at the top; background becomes opaque after scrolling.
+   The JS adds .scrolled when pageYOffset > 40px.
+────────────────────────────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;              /* shorthand for left: 0; right: 0 */
+  z-index: 1000;
+  height: var(--navbar-h);
+  /* Transparent at the top; backdrop-filter adds glassmorphism */
+  background: rgba(36, 53, 36, 0.0);
+  backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  transition:
+    background var(--transition-mid),
+    backdrop-filter var(--transition-mid),
+    border-color var(--transition-mid);
+}
+
+/* When the user has scrolled: solid dark-green nav */
+.navbar.scrolled {
+  background: rgba(36, 53, 36, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--vc-600);
+  box-shadow: var(--shadow-md);
+}
+
+/* Inner flex row */
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Logo / initials */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+.nav-logo:hover { opacity: 1; color: var(--vc-300); }
+
+/* Logo image inside the nav brand */
+.nav-logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: opacity var(--transition-fast);
+}
+.nav-logo:hover .nav-logo-img { opacity: 0.6; filter: sepia(1) saturate(3) hue-rotate(65deg) brightness(0.85); }
+
+/* Navigation link list */
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+/* Individual nav links */
+.nav-link {
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.75);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+/* Underline slide-in effect on hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background: var(--vc-300);
+  border-radius: 2px;
+  transition: transform var(--transition-fast);
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--white);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ── Mobile hamburger ─────────────────────────────────────────────────────── */
+.nav-toggle {
+  display: none;                /* hidden on desktop */
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+
+.bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* Animate bars into X when menu is open */
+.nav-toggle[aria-expanded="true"] .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   7. ABOUT / HERO SECTION
+   Dark forest-green background. Large split layout: photo left, text right.
+────────────────────────────────────────────────────────────────────────────── */
+.section-about {
+  min-height: 100dvh;           /* full viewport height */
+  padding-block-start: var(--navbar-h); /* compensate for fixed nav */
+  background: var(--vc-900);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Decorative animated background blobs ─────────────────────────────────── */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.18;
+  animation: blobFloat 12s ease-in-out infinite alternate;
+}
+
+.blob-1 {
+  width: 520px;
+  height: 520px;
+  background: var(--vc-500);
+  top: -10%;
+  right: -8%;
+  animation-duration: 14s;
+}
+
+.blob-2 {
+  width: 340px;
+  height: 340px;
+  background: var(--gold);
+  bottom: 5%;
+  left: -5%;
+  animation-duration: 18s;
+  animation-delay: -4s;
+}
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1);      }
+  50%  { transform: translate(30px, -20px) scale(1.06); }
+  100% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+/* ── About inner layout ───────────────────────────────────────────────────── */
+.about-inner {
+  display: grid;
+  /* Photo takes a bit less than half the width */
+  grid-template-columns: 380px 1fr;
+  align-items: center;
+  gap: var(--space-xl);
+  padding-block: var(--space-xl);
+  position: relative; /* above blobs */
+  z-index: 1;
+}
+
+/* ── Profile photo area ──────────────────────────────────────────────────── */
+.about-photo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The frame clips the image to a circle */
+.about-photo-frame {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* Green-tinted border via gradient */
+  border: 4px solid var(--vc-500);
+  box-shadow: var(--shadow-lg), 0 0 0 8px rgba(74,124,74,0.18);
+  z-index: 2;
+}
+
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Fallback: shown when image fails to load */
+.about-photo-fallback {
+  display: none;               /* JS/onerror shows this */
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--vc-700);
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--vc-300);
+}
+
+/* Decorative outer ring — rotates slowly */
+.about-photo-ring {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 2px dashed var(--vc-400);
+  opacity: 0.45;
+  animation: ringRotate 30s linear infinite;
+  z-index: 1;
+}
+
+@keyframes ringRotate {
+  to { transform: rotate(360deg); }
+}
+
+/* ── About text ───────────────────────────────────────────────────────────── */
+.about-text {
+  color: var(--white);
+}
+
+.about-greeting {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vc-300);
+  margin-bottom: var(--space-sm);
+}
+
+.about-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: var(--space-sm);
+}
+/* The LEFEZ surname is highlighted in the accent green */
+.about-name .accent { color: var(--vc-300); }
+
+.about-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--gold-light);
+  margin-bottom: var(--space-md);
+}
+
+.about-bio {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+  max-width: 48ch;
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Quick links row ──────────────────────────────────────────────────────── */
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Each icon + label pill */
+.quick-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;           /* fully rounded pill */
+  border: 1px solid var(--vc-600);
+  color: rgba(255,255,255,0.75);
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: rgba(74,124,74,0.12);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.quick-link svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.quick-link:hover {
+  background: rgba(74,124,74,0.3);
+  border-color: var(--vc-400);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* CTA variant for the CV download — more prominent */
+.quick-link--cta {
+  background: var(--vc-500);
+  border-color: var(--vc-500);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.quick-link--cta:hover {
+  background: var(--vc-400);
+  border-color: var(--vc-400);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   8. PROJECTS SECTION
+   Light cream background. Two sub-sections (creative / dev) each with a grid
+   of cards. Cards have hover lift and open a modal on click.
+────────────────────────────────────────────────────────────────────────────── */
+.section-projects {
+  background: var(--cream);
+}
+
+/* Sub-section block */
+.projects-category {
+  margin-bottom: var(--space-xl);
+}
+.projects-category:last-child { margin-bottom: 0; }
+
+/* Category heading line */
+.category-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  color: var(--vc-700);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.category-icon {
+  color: var(--vc-500);
+  font-size: 1.1em;
+}
+
+/* Subtle secondary text after the dash */
+.category-subtitle {
+  font-size: 0.95rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-light);
+}
+
+/* Responsive card grid: auto-fill columns, min 260px each */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+/* ── Project card ─────────────────────────────────────────────────────────── */
+.project-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    transform var(--transition-mid),
+    box-shadow var(--transition-mid);
+  /* Border at bottom that grows on hover */
+  border-bottom: 3px solid transparent;
+}
+
+.project-card:hover,
+.project-card:focus {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-bottom-color: var(--vc-500);
+  outline: none;
+}
+
+/* Dev cards get a slightly different bottom accent */
+.project-card--dev:hover,
+.project-card--dev:focus {
+  border-bottom-color: var(--gold);
+}
+
+/* ── Card image area ──────────────────────────────────────────────────────── */
+.card-img-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--vc-100);
+  overflow: hidden;
+}
+
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.project-card:hover .card-img-wrap img {
+  transform: scale(1.05);
+}
+
+/* Fallback icon shown when image is missing (.no-img added by onerror) */
+.card-img-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--vc-400);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-img-wrap.no-img .card-img-fallback { opacity: 1; }
+.card-img-wrap.no-img img               { opacity: 0;  }
+
+/* ── Card text body ───────────────────────────────────────────────────────── */
+.card-body {
+  padding: var(--space-md);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--vc-800);
+  margin-bottom: var(--space-xs);
+}
+
+.card-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+/* "See more →" hint */
+.card-cta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--vc-500);
+  letter-spacing: 0.03em;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+.project-card:hover .card-cta { color: var(--vc-700); }
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   9. PROJECT MODAL
+   Full-screen overlay with a centred content box.
+   Fade-in / slide-up animation when opened.
+────────────────────────────────────────────────────────────────────────────── */
+.modal {
+  /* Hidden by default — JS toggles .modal--open */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  padding: var(--space-md);
+  /* Invisible until opened */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-mid);
+}
+
+.modal--open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Semi-transparent dark overlay behind the modal box */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 46, 26, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+/* The white modal panel */
+.modal-box {
+  position: relative;
+  z-index: 1;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  max-width: 600px;
+  width: 100%;
+  max-height: 85dvh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  /* Start slightly below, slide up when opened */
+  transform: translateY(24px) scale(0.97);
+  transition: transform var(--transition-slow);
+  /* Green left accent stripe */
+  border-left: 5px solid var(--vc-500);
+}
+
+.modal--open .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+/* Close ✕ button in top-right corner */
+.modal-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--vc-100);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vc-700);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.modal-close svg { width: 20px; height: 20px; }
+.modal-close:hover { background: var(--vc-500); color: var(--white); }
+
+/* Modal text elements */
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--vc-800);
+  margin-bottom: var(--space-xs);
+  padding-right: 2.5rem;     /* avoid overlap with close button */
+}
+
+.modal-date {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--vc-500);
+  background: var(--vc-100);
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: var(--space-md);
+}
+
+.modal-description {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: var(--space-md);
+}
+
+/* Skill badges row */
+.modal-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+/* Individual skill badge */
+.skill-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--vc-700);
+  background: var(--vc-100);
+  border: 1px solid var(--vc-300);
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+}
+
+/* "View Project" link shown only for dev projects */
+.modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--vc-500);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+.modal-link:hover { color: var(--vc-700); }
+.modal-link[hidden] { display: none; }
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   10. JOURNEY / TIMELINE SECTION
+   Alternating left-right timeline on desktop, single column on mobile.
+   The vertical green line is drawn via the ::before pseudo-element.
+────────────────────────────────────────────────────────────────────────────── */
+.section-journey {
+  background: var(--vc-100); /* very light green tint */
+}
+
+/* Timeline container — holds the vertical line */
+.timeline {
+  position: relative;
+  max-width: 860px;
+  margin-inline: auto;
+  padding-block: var(--space-md);
+}
+
+/* The continuous vertical green line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--vc-500) 8%,
+    var(--vc-500) 92%,
+    transparent
+  );
+}
+
+/* Each timeline row */
+.timeline-item {
+  display: grid;
+  /* The card takes a column; the marker sits at the centre */
+  grid-template-columns: 1fr 48px 1fr;
+  align-items: start;
+  gap: 0 var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+/* Even items: card on the right side */
+.timeline-item:nth-child(even) .timeline-card {
+  grid-column: 3;
+  grid-row: 1;
+}
+/* Even items: empty space on the left */
+.timeline-item:nth-child(even) .timeline-marker {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* Odd items: card on the left, marker on right-hand centre */
+.timeline-item:nth-child(odd) .timeline-card {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: right;
+}
+.timeline-item:nth-child(odd) .timeline-marker {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* The circular dot on the timeline */
+.timeline-marker {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--vc-500);
+  border: 3px solid var(--vc-100);
+  box-shadow: 0 0 0 4px var(--vc-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  margin-top: var(--space-xs);
+}
+
+.timeline-marker svg {
+  width: 22px;
+  height: 22px;
+  color: var(--white);
+}
+
+/* Work-experience dot uses gold accent instead */
+.timeline-marker--work {
+  background: var(--gold);
+  box-shadow: 0 0 0 4px var(--gold);
+}
+
+/* The card itself */
+.timeline-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-mid), transform var(--transition-mid);
+}
+
+.timeline-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+/* Education vs Work tags */
+.timeline-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: var(--space-xs);
+}
+
+.timeline-tag--edu {
+  background: var(--vc-100);
+  color: var(--vc-700);
+  border: 1px solid var(--vc-300);
+}
+
+.timeline-tag--work {
+  background: #fff8e8;
+  color: #8a6820;
+  border: 1px solid var(--gold-light);
+}
+
+.timeline-date {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--vc-800);
+  margin-bottom: 0.2rem;
+}
+
+.timeline-org {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--vc-500);
+  margin-bottom: var(--space-xs);
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   11. SKILLS SECTION
+────────────────────────────────────────────────────────────────────────────── */
+.section-skills {
+  background: var(--cream);
+}
+
+/* Three-column responsive grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* Languages card: always spans 2 columns so the two badge columns fit comfortably */
+.skills-group--tags:last-of-type {
+  grid-column: span 2;
+  min-width: 0;            /* prevents grid blowout */
+  max-width: 480px;        /* cap it so it doesn't stretch too wide */
+  justify-self: start;     /* don't stretch to fill the full span */
+}
+
+/* Each group card */
+.skills-group {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.skills-group-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--vc-700);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 2px solid var(--vc-200);
+}
+
+/* ── Skill progress bars ──────────────────────────────────────────────────── */
+.skill-bar {
+  margin-bottom: var(--space-md);
+}
+.skill-bar:last-child { margin-bottom: 0; }
+
+/* Label row: skill name on left, percentage on right */
+.skill-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 0.35rem;
+}
+
+.skill-bar-pct {
+  color: var(--vc-500);
+  font-weight: 600;
+}
+
+/* Track (background of the bar) */
+.skill-bar-track {
+  height: 7px;
+  background: var(--vc-100);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Fill — width set by JS from data-level attribute */
+.skill-bar-fill {
+  height: 100%;
+  width: 0;                       /* starts at 0; animated by JS */
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--vc-600), var(--vc-400));
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Soft skill tags ──────────────────────────────────────────────────────── */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.skill-tag {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--vc-700);
+  background: var(--vc-100);
+  border: 1px solid var(--vc-300);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.skill-tag:hover {
+  background: var(--vc-500);
+  color: var(--white);
+  border-color: var(--vc-500);
+}
+
+/* Language tag variant — flag bigger, level dimmed */
+.skill-tag--lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.1rem;          /* uniform height across all lang badges */
+  white-space: nowrap;     /* width follows content, no wrapping */
+}
+
+/* Two-column layout for the Languages card */
+.lang-columns {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* Each column: vertical stack of 3 badges, aligned to start (no stretching) */
+.lang-columns .skill-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: var(--space-xs);
+}
+
+.lang-flag {
+  /* flag-icons renders as a background-image span — needs explicit size */
+  display: inline-block;
+  width: 1.3em;
+  height: 1em;
+  vertical-align: middle;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+}
+/* <img> variant for custom SVG flags (e.g. Breton gwenn-ha-du) */
+.lang-flag--img {
+  object-fit: cover;
+}
+.lang-level {
+  opacity: 0.65;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   12. TESTIMONIALS SECTION
+   Dark forest-green background for contrast. Cards float on top.
+────────────────────────────────────────────────────────────────────────────── */
+.section-testimonials {
+  background: var(--vc-900);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle decorative texture */
+.section-testimonials::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(74,124,74,0.12) 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(201,168,76,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Override section header text colour for dark background */
+.section-testimonials .section-label { color: var(--vc-300); }
+.section-testimonials .section-title { color: var(--white); }
+
+/* Grid of cards */
+.testimonials-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+/* Individual testimonial card */
+.testimonial-card {
+  background: var(--vc-800);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--vc-600);
+  transition: transform var(--transition-mid), box-shadow var(--transition-mid);
+  position: relative;
+  /* flex column so the PDF button can be pushed to the bottom-right */
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Oversized decorative opening quote mark */
+.testimonial-quote-mark {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--vc-600);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Quote text */
+.testimonial-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  font-style: italic;
+  margin-bottom: var(--space-md);
+  padding-top: var(--space-lg);  /* clear the large quote mark */
+}
+
+/* Author row: avatar + name + role */
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Initials avatar circle */
+.testimonial-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--vc-500);
+  color: var(--white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.testimonial-author strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--white);
+  font-weight: 600;
+  line-height: 2;
+}
+
+/* Company name — second <strong> after the role <span> */
+.testimonial-author span + strong {
+  font-size: 0.8rem;
+  color: var(--vc-300);
+  font-weight: 700;
+  margin-top: 0;
+}
+
+.testimonial-author span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--vc-300);
+  opacity: 0.8;
+  line-height: 1.2;
+  margin-top: 0.1rem;
+}
+
+/* View letter button */
+.testimonial-pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: var(--space-md);
+  margin-left: auto;          /* pushes it to the right */
+  align-self: flex-end;       /* flex-column alignment */
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--vc-500);
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--vc-300);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.testimonial-pdf-link svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.testimonial-pdf-link:hover {
+  background: var(--vc-500);
+  color: var(--white);
+  border-color: var(--vc-500);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   13. CONTACT SECTION
+────────────────────────────────────────────────────────────────────────────── */
+.section-contact {
+  background: var(--cream-dark);
+}
+
+.contact-inner {
+  text-align: center;
+  max-width: 580px;
+  margin-inline: auto;
+}
+
+.contact-copy {
+  font-size: 1.1rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: var(--space-lg);
+}
+
+/* Primary CTA button */
+.contact-btn {
+  display: inline-block;
+  padding: 0.9rem 2.4rem;
+  background: var(--vc-500);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-btn:hover {
+  background: var(--vc-700);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Social icon row */
+.contact-socials {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.contact-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--vc-500);
+  color: var(--vc-700);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.contact-socials a svg { width: 20px; height: 20px; }
+
+.contact-socials a:hover {
+  background: var(--vc-500);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   14. FOOTER
+────────────────────────────────────────────────────────────────────────────── */
+.site-footer {
+  background: var(--vc-900);
+  padding-block: var(--space-md);
+  border-top: 1px solid var(--vc-700);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  color: var(--vc-300);
+}
+
+.footer-top {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--vc-400);
+  transition: color var(--transition-fast);
+}
+.footer-top:hover { color: var(--white); }
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   15. SCROLLBAR STYLING (Webkit — Chrome, Edge, Safari)
+   Subtle green-tinted scrollbar to match the theme.
+────────────────────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 8px; }
+::-webkit-scrollbar-track { background: var(--vc-900); }
+::-webkit-scrollbar-thumb { background: var(--vc-600); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--vc-500); }
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   16. RESPONSIVE — TABLET (max-width: 900px)
+────────────────────────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+
+  /* About: stack vertically, centre-align */
+  .about-inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-lg);
+  }
+
+  .about-bio   { margin-inline: auto; }
+  .quick-links { justify-content: center; }
+
+  /* Timeline: collapse to single column */
+  .timeline::before { left: 24px; }
+
+  .timeline-item {
+    grid-template-columns: 48px 1fr;
+    gap: 0 var(--space-md);
+  }
+
+  /* All cards go to the right column regardless of odd/even */
+  .timeline-item:nth-child(odd) .timeline-card,
+  .timeline-item:nth-child(even) .timeline-card {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: left;
+  }
+  .timeline-item:nth-child(odd) .timeline-marker,
+  .timeline-item:nth-child(even) .timeline-marker {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   17. RESPONSIVE — MOBILE (max-width: 600px)
+────────────────────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+
+  /* Show hamburger, hide nav links by default */
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    position: fixed;
+    top: var(--navbar-h);
+    inset-inline: 0;
+    background: var(--vc-800);
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-sm);
+    /* Hide off-screen upward */
+    transform: translateY(-110%);
+    transition: transform var(--transition-mid);
+    border-bottom: 1px solid var(--vc-600);
+  }
+
+  /* Slide menu down when toggle is open */
+  .nav-links.is-open { transform: translateY(0); }
+
+  .nav-link { font-size: 1rem; padding-block: var(--space-sm); }
+
+  /* Shrink photo on small screens */
+  .about-photo-frame { width: 200px; height: 200px; }
+
+  /* Cards go to single column */
+  .cards-grid { grid-template-columns: 1fr; }
+
+  /* Modal full-width */
+  .modal-box {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    max-height: 92dvh;
+  }
+
+  /* Footer stack */
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────────
+   18. REDUCED MOTION
+   Respect the user's OS preference to minimise / disable animations.
+────────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* Ensure fade-in elements are visible even without animation */
+  .fade-in { opacity: 1; transform: none; }
+}
